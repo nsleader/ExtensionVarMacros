@@ -1,11 +1,21 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-/// A macro that produces both a value and a string containing the
-/// source code that generated the value. For example,
+/// Макрос позволяет использовать свойства в экстеншенах класса.
+///  - Parameters:
+///     - key: Имя статической переменной для ассоциативного сохранения
+///     - policy: Политика ассоциативной ссылки (`OBJC_ASSOCIATION_ASSIGN`, `OBJC_ASSOCIATION_RETAIN_NONATOMIC`, `OBJC_ASSOCIATION_COPY_NONATOMIC`, `OBJC_ASSOCIATION_RETAIN`, `OBJC_ASSOCIATION_COPY`)
 ///
-///     #stringify(x + y)
+/// Используется только в расширениях класса! Свойство должно иметь опциональный тип.
+/// ```
+/// extenstion UIView {
+///     @associated(key: "test_objc_key", policy: "OBJC_ASSOCIATION_RETAIN")
+///     var someProperty: Int?
+/// }
+/// let view = UIView()
+/// view.someProperty = 5
 ///
-/// produces a tuple `(x + y, "x + y")`.
-@freestanding(expression)
-public macro stringify<T>(_ value: T) -> (T, String) = #externalMacro(module: "ExtensionVarMacros", type: "StringifyMacro")
+/// ```
+///
+@attached(accessor)
+public macro associated(key: String, policy: String) = #externalMacro(module: "ExtensionVarMacros", type: "ExtensionVarMacro")

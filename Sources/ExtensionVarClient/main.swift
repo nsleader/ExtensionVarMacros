@@ -1,8 +1,18 @@
 import ExtensionVar
+import ObjectiveC
 
-let a = 17
-let b = 25
+class TestClass {
+}
 
-let (result, code) = #stringify(a + b)
+extension TestClass {
+    static var test_objc_key: UInt = 0
+    
+    @associated(key: "test_objc_key", policy: "OBJC_ASSOCIATION_RETAIN")
+    var test: Int?
+}
 
-print("The value \(result) was produced by the code \"\(code)\"")
+
+var inst = TestClass()
+inst.test = 5
+
+print(inst.test)
