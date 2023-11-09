@@ -7,9 +7,16 @@
 ///     - policy: Политика ассоциативной ссылки (`OBJC_ASSOCIATION_ASSIGN`, `OBJC_ASSOCIATION_RETAIN_NONATOMIC`, `OBJC_ASSOCIATION_COPY_NONATOMIC`, `OBJC_ASSOCIATION_RETAIN`, `OBJC_ASSOCIATION_COPY`)
 ///
 /// Используется только в расширениях класса! Свойство должно иметь опциональный тип.
+///
+///
 /// ```
+/// import ExtensionVar
+/// import ObjectiveC
+///
 /// extenstion UIView {
-///     @associated(key: "test_objc_key", policy: "OBJC_ASSOCIATION_RETAIN")
+///     static var someProperty_key: UInt = 0
+///
+///     @associated(key: "someProperty_key", policy: "OBJC_ASSOCIATION_RETAIN")
 ///     var someProperty: Int?
 /// }
 /// let view = UIView()
